@@ -42,7 +42,7 @@ foreach ($nr in $origList) {
             continue
         }
         if (($nr + $nr2) -gt 2020) {
-            
+            break
         }
         foreach ($nr3 in $origList) {
             if ($nr3 -eq $nr2) {
