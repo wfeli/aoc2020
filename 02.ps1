@@ -1,5 +1,4 @@
 $passwords = Get-Content .\input\02.txt
-#$passwords = Get-Content .\input\02_test.txt
 $valid = 0
 foreach ($line in $passwords) {
     $split = $line.split(':')
