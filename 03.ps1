@@ -23,30 +23,21 @@ function Get-TobogganPath {
         $array
     )
     $treecount = 0
-    $i = 0
     $right = 0
-    foreach ($row in $array) {
+    for ($i = 0; $i -lt $array.Count; $i++) {
         if (($i % $d) -ne 0) {
-            Write-Host $i
-            $i++
- 
             continue
         }
-        if ($row.ToCharArray()[$right] -eq "#") {
+        if ($array[$i].ToCharArray()[$right] -eq "#") {
             $treecount++
         }
         if (($right + $r) -gt 30) {
             $right = ($right + $r) - 31
-            continue
         }
-        $right = $right + $r
-        $i++
+        else {
+            $right = $right + $r
+        }
     }
     return $treecount
 }
-$path1 = Get-TobogganPath -array $con -D 1 -R 1
-$path2 = Get-TobogganPath -array $con -D 1 -R 3
-$path3 = Get-TobogganPath -array $con -D 1 -R 5
-$path4 = Get-TobogganPath -array $con -D 1 -R 7
-$path5 = Get-TobogganPath -array $con -D 2 -R 1
-$path1 * $path2 * $path3 * $path4 * $path5 
+(Get-TobogganPath -array $con -D 1 -R 1) * (Get-TobogganPath -array $con -D 1 -R 3) * (Get-TobogganPath -array $con -D 1 -R 5) * (Get-TobogganPath -array $con -D 1 -R 7) * (Get-TobogganPath -array $con -D 2 -R 1)
