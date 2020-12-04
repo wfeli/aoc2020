@@ -11,9 +11,7 @@ function New-Sum {
         $m = [math]::Round( ($iL + $iR) / 2)
         $sum = $list[$m] + $compare
         if ($sum -eq 2020) {
-            Write-Host $list[$m]
-            Write-Host $compare
-            exit
+            return ($list[$m] * $compare)
         }
         if ($sum -lt 2020) {
             $iL = $m + 1
@@ -26,16 +24,16 @@ function New-Sum {
     
 }
 
-
-$n=1
-$lenOrig = $origList.count -1
-foreach($line in $origList){
-    Write-Host -ForegroundColor Gray "Currently in line $($n)"
-    New-Sum -compare $line -list $origList -iR $lenOrig -iL 0
-    $n++
+$lenOrig = $origList.count - 1
+foreach ($line in $origList) {
+    $s = New-Sum -compare $line -list $origList -iR $lenOrig -iL 0
+    if ($s) {
+        Write-Host $s
+        break
+    }
 }
 
-####### Part 2
+####### p2, meh
 foreach ($nr in $origList) {
     foreach ($nr2 in $origList) {
         if ($nr2 -eq $nr) {
@@ -56,13 +54,9 @@ foreach ($nr in $origList) {
                 continue
             }
             if ($sum -eq 2020) {
-                Write-Host $nr
-                Write-Host $nr2
-                Write-Host $nr3
+                Write-Host ($nr * $nr2 * $nr3)
                 exit
             }
         }
     }
 }
-
-
