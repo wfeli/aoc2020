@@ -11,18 +11,14 @@ function Get-TobogganPath {
         if (($i % $d) -ne 0) {
             continue
         }
-        if ($array[$i].ToCharArray()[$right] -eq "#") {
+        if ($array[$i].ToCharArray()[($right % $array[$i].length)] -eq "#") {
             $treecount++
         }
-        if (($right + $r) -gt ($array[$i].length -1)) {
-            $right = ($right + $r) - $array[$i].length
-        }
-        else {
-            $right = $right + $r
-        }
+        $right = $right + $r
     }
     return $treecount
 }
 Get-TobogganPath -array $con -D 1 -R 3
 ## Part 2
+
 (Get-TobogganPath -array $con -D 1 -R 1) * (Get-TobogganPath -array $con -D 1 -R 3) * (Get-TobogganPath -array $con -D 1 -R 5) * (Get-TobogganPath -array $con -D 1 -R 7) * (Get-TobogganPath -array $con -D 2 -R 1)
